@@ -10,15 +10,12 @@ class Item
     @category = category
     @price = price
     @is_imported = is_imported
-    @tax = 0.0
     @quantity = quantity
   end
 
 
-  def get_total_tax
-    @tax += get_basic_tax
-    @tax += get_import_tax
-    @tax = @tax*@quantity
+  def get_tax
+   get_basic_tax + get_import_tax
   end
 
   def get_details
@@ -27,13 +24,11 @@ class Item
         :price => @price,
         :quantity => @quantity,
         :is_imported => @is_imported,
+        :sales_tax => get_tax,
+        :total_sales_tax => get_total_tax,
+        :total_amount => get_total_amount
     }
   end
-
-  def description
-    "#{@quantity} #{@is_imported ? "imported":""} #{@category}: #{@price}"
-  end
-
 
   def get_basic_tax
     is_exempted ? 0:Tax.get_basic_tax_from(@price)
@@ -41,6 +36,10 @@ class Item
 
   def get_total_amount
     get_total_price + get_total_tax
+  end
+
+  def get_total_tax
+    get_tax*@quantity
   end
 
   def get_total_price

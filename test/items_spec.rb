@@ -1,4 +1,4 @@
-require_relative '../src/items'
+require_relative '../src/item'
 
 describe "testing items class" do
 

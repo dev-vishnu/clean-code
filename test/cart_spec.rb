@@ -1,5 +1,5 @@
 require_relative '../src/cart'
-require_relative '../src/items'
+require_relative '../src/item'
 
 describe "testing cart" do
   it "should add item to the cart" do

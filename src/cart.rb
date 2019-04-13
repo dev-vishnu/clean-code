@@ -1,15 +1,14 @@
-require_relative '../src/items'
+require_relative '../src/item'
 require_relative '../src/bill'
 
 class Cart
 
- attr_accessor :items, :total_tax, :total, :bill
+ attr_accessor :items, :total_tax, :total
 
  def initialize
    @items = []
    @total_tax = 0.0
    @total = 0.0
-   @bill = {}
  end
 
  def addItem(item)
@@ -37,11 +36,4 @@ class Cart
    end
  end
 
- def generate_bill
-   @bill = Bill.new(get_items_details,get_total_tax,get_total)
- end
-
- def print_bill
-   @bill.print
- end
 end
